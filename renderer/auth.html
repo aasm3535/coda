@@ -97,9 +97,8 @@
   <script type="module">
     import { createClient } from '@supabase/supabase-js';
 
-    // TODO: Replace with your Supabase project URL and anon key
-    const supabaseUrl = 'YOUR_SUPABASE_URL';
-    const supabaseKey = 'YOUR_SUPABASE_ANON_KEY';
+    // TODO: Supabase config is now dynamically loaded from the preload script
+    const { url: supabaseUrl, key: supabaseKey } = window.electron.supabaseConfig;
     const supabase = createClient(supabaseUrl, supabaseKey);
 
     document.getElementById('github-login').addEventListener('click', async () => {
