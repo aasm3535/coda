@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Coda</title>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Funnel+Display&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="./src/rainbow.css">
   <style>
     body {
@@ -16,7 +16,7 @@
       justify-content: center;
       align-items: center;
       background-color: #151515; /* Immediate dark background */
-      font-family: 'Poppins', sans-serif;
+      font-family: 'Funnel Display', sans-serif;
       color: white;
       overflow: hidden;
     }
@@ -118,21 +118,11 @@
   <div class='h'></div>
   <div class='v'></div>
   <h1 id="main-title">Coda</h1>
-  <div class="loader-container" id="loader-container">
-    <span class="bar"></span>
-    <span class="bar"></span>
-    <span class="bar"></span>
-  </div>
-
   <script>
     document.addEventListener('DOMContentLoaded', () => {
-      const mainTitle = document.getElementById('main-title');
-      const loaderContainer = document.getElementById('loader-container');
-
       setTimeout(() => {
-        mainTitle.classList.add('fade-out');
-        loaderContainer.classList.add('fade-in-center');
-      }, 1000); // Coda text stays for 1 second before fading out
+        window.location.href = 'auth.html';
+      }, 5000); // 5-second delay
     });
   </script>
 </body>
