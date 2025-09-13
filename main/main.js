@@ -16,14 +16,14 @@ function createSplashWindow() {
       contextIsolation: false,
     }
   });
-  splashWindow.loadFile(path.join(__dirname, '../renderer/preloader.html'));
+  splashWindow.loadFile(path.join(__dirname, '../renderer/index.html'));
   splashWindow.on('closed', () => (splashWindow = null));
 }
 
 function createMainWindow () {
   mainWindow = new BrowserWindow({
-    width: 1200,
-    height: 800,
+    width: 800,
+    height: 600,
     backgroundColor: '#000000',
     show: false, // Don't show until content is loaded
     frame: false,
@@ -72,4 +72,8 @@ app.on('window-all-closed', () => {
 // Listener to handle drag region
 ipcMain.on('set-drag-region', (event, region) => {
   mainWindow.setVibrancy('dark'); // Example, not directly related to drag
+});
+
+ipcMain.on('load-main', () => {
+  mainWindow.loadFile(path.join(__dirname, '../renderer/index.html'));
 });

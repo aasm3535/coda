@@ -162,6 +162,3 @@ body {
   position: absolute;
 }
 
-body.dragging .rainbow {
-  animation-play-state: paused !important;
-}

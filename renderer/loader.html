@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Coda</title>
+  <title>Coda Loading</title>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="./src/rainbow.css">
   <style>
@@ -26,36 +26,27 @@
       transition: opacity 0.5s ease;
     }
 
-    #main-title {
+    #title {
       font-size: 4.5rem;
-      font-weight: 600; /* SemiBold */
+      font-weight: 600;
       margin-bottom: 2rem;
       color: white;
       position: relative;
       z-index: 10;
-      opacity: 1; /* Initially visible */
-      transition: opacity 0.8s cubic-bezier(0.2, 0.8, 0.2, 1); /* More Apple-like ease */
+      opacity: 0; /* Title starts faded */
+      transition: opacity 0.5s ease;
     }
 
-    #main-title.fade-out {
-      opacity: 0;
-    }
-
-    .loader-container {
-      position: absolute; /* Ensure absolute positioning for centering */
+    .loader {
+      position: absolute;
       top: 50%;
       left: 50%;
-      transform: translate(-50%, -50%) translateY(20px); /* Adjust initial position slightly below center */
+      transform: translate(-50%, -50%);
       display: flex;
       align-items: center;
       justify-content: center;
-      opacity: 0; /* Initially hidden */
-      transition: opacity 0.8s cubic-bezier(0.2, 0.8, 0.2, 1), transform 0.8s cubic-bezier(0.2, 0.8, 0.2, 1);
-    }
-
-    .loader-container.fade-in-center {
-      opacity: 1;
-      transform: translate(-50%, -50%) translateY(0); /* Move to true center */
+      opacity: 1; /* Loader visible immediately */
+      z-index: 20;
     }
 
     .bar {
@@ -88,10 +79,24 @@
         transform: scaleY(1);
       }
     }
+
+    .spinner {
+      border: 2px solid rgba(255, 255, 255, 0.3);
+      border-radius: 50%;
+      border-top: 2px solid white;
+      width: 15px;
+      height: 15px;
+      animation: spin 1s linear infinite;
+      margin-right: 0.5rem;
+    }
+
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
   </style>
 </head>
 <body>
-  <div id="drag-handle" style="position: absolute; top: 0; left: 0; z-index: 1000; -webkit-app-region: drag; height: 30px; width: 100%;"></div>
   <div class='rainbow'></div>
   <div class='rainbow'></div>
   <div class='rainbow'></div>
@@ -117,23 +122,11 @@
   <div class='rainbow'></div>
   <div class='h'></div>
   <div class='v'></div>
-  <h1 id="main-title">Coda</h1>
-  <div class="loader-container" id="loader-container">
+  <h1 id="title">Coda</h1>
+  <div class="loader" id="loader">
     <span class="bar"></span>
     <span class="bar"></span>
     <span class="bar"></span>
   </div>
-
-  <script>
-    document.addEventListener('DOMContentLoaded', () => {
-      const mainTitle = document.getElementById('main-title');
-      const loaderContainer = document.getElementById('loader-container');
-
-      setTimeout(() => {
-        mainTitle.classList.add('fade-out');
-        loaderContainer.classList.add('fade-in-center');
-      }, 1000); // Coda text stays for 1 second before fading out
-    });
-  </script>
 </body>
 </html>
