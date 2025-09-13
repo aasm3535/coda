@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Coda Auth</title>
+  <link href="https://fonts.googleapis.com/css2?family=Funnel+Display&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./src/rainbow.css">
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      background-color: #151515;
+      font-family: 'Funnel Display', sans-serif;
+      color: white;
+      overflow: hidden;
+    }
+    #title {
+      font-size: 4.5rem;
+      font-weight: 600;
+      margin-bottom: 2rem;
+      color: white;
+      position: relative;
+      z-index: 10;
+    }
+    .login-buttons {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1rem;
+    }
+    .login-button {
+      background-color: #252525;
+      border: none;
+      color: white;
+      padding: 1rem 2rem;
+      font-size: 1.2rem;
+      border-radius: 0.5rem;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    }
+    .login-button:hover {
+      background-color: #353535;
+    }
+    .login-button img {
+      width: 24px;
+      height: 24px;
+    }
+  </style>
+</head>
+<body>
+  <div id="drag-handle" style="position: absolute; top: 0; left: 0; z-index: 1000; -webkit-app-region: drag; height: 30px; width: 100%;"></div>
+  <div class='rainbow'></div>
+  <div class='rainbow'></div>
+  <div class='rainbow'></div>
+  <div class='rainbow'></div>
+  <div class='rainbow'></div>
+  <div class='rainbow'></div>
+  <div class='rainbow'></div>
+  <div class='rainbow'></div>
+  <div class='rainbow'></div>
+  <div class='rainbow'></div>
+  <div class='rainbow'></div>
+  <div class='rainbow'></div>
+  <div class='rainbow'></div>
+  <div class='rainbow'></div>
+  <div class='rainbow'></div>
+  <div class='rainbow'></div>
+  <div class='rainbow'></div>
+  <div class='rainbow'></div>
+  <div class='rainbow'></div>
+  <div class='rainbow'></div>
+  <div class='rainbow'></div>
+  <div class='rainbow'></div>
+  <div class='h'></div>
+  <div class='v'></div>
+  <h1 id="title">Вход</h1>
+  <div class="login-buttons">
+    <button class="login-button" id="github-login">
+      <img src="https://cdn-icons-png.flaticon.com/512/25/25231.png" alt="GitHub">
+      Login with GitHub
+    </button>
+    <button class="login-button" id="google-login">
+      <img src="https://cdn-icons-png.flaticon.com/512/281/281764.png" alt="Google">
+      Login with Google
+    </button>
+  </div>
+  <script type="module">
+    import { createClient } from '@supabase/supabase-js';
+
+    // TODO: Replace with your Supabase project URL and anon key
+    const supabaseUrl = 'YOUR_SUPABASE_URL';
+    const supabaseKey = 'YOUR_SUPABASE_ANON_KEY';
+    const supabase = createClient(supabaseUrl, supabaseKey);
+
+    document.getElementById('github-login').addEventListener('click', async () => {
+      const { error } = await supabase.auth.signInWithOAuth({
+        provider: 'github',
+      });
+      if (error) {
+        console.error('Error logging in with GitHub:', error.message);
+      }
+    });
+
+    document.getElementById('google-login').addEventListener('click', async () => {
+      const { error } = await supabase.auth.signInWithOAuth({
+        provider: 'google',
+      });
+      if (error) {
+        console.error('Error logging in with Google:', error.message);
+      }
+    });
+
+    function githubRestApi() {
+      console.log('github-rest-api function called');
+    }
+  </script>
+</body>
+</html>
