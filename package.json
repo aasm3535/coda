@@ -2,8 +2,12 @@
   "name": "coda",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "main/main.js",
   "scripts": {
+    "start": "npx electron .",
+    "dev": "electron . --dev",
+    "build": "electron-builder",
+    "dist": "npm run build",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -16,5 +20,31 @@
   "bugs": {
     "url": "https://github.com/aasm3535/coda/issues"
   },
-  "homepage": "https://github.com/aasm3535/coda#readme"
+  "homepage": "https://github.com/aasm3535/coda#readme",
+  "devDependencies": {
+    "electron": "^38.1.0",
+    "electron-builder": "^26.0.12"
+  },
+  "build": {
+    "appId": "com.example.coda",
+    "productName": "Coda",
+    "directories": {
+      "output": "build"
+    },
+    "files": [
+      "main/**/*",
+      "renderer/**/*",
+      "assets/**/*",
+      "package.json"
+    ],
+    "mac": {
+      "category": "public.app-category.productivity"
+    },
+    "win": {
+      "target": "nsis"
+    },
+    "linux": {
+      "target": "AppImage"
+    }
+  }
 }
