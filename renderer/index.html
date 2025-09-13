@@ -118,11 +118,39 @@
   <div class='h'></div>
   <div class='v'></div>
   <h1 id="main-title">Coda</h1>
+  <div class="loader-container" id="loader-container">
+    <span class="bar"></span>
+    <span class="bar"></span>
+    <span class="bar"></span>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.57.2/dist/umd/supabase.min.js"></script>
   <script>
     document.addEventListener('DOMContentLoaded', () => {
+      const mainTitle = document.getElementById('main-title');
+      const loaderContainer = document.getElementById('loader-container');
+      const { createClient } = supabase;
+
+      // TODO: Replace with your Supabase project URL and anon key
+      const supabaseUrl = 'YOUR_SUPABASE_URL';
+      const supabaseKey = 'YOUR_SUPABASE_ANON_KEY';
+      const _supabase = createClient(supabaseUrl, supabaseKey);
+
+      // Fade out title and fade in loader after 1 second
       setTimeout(() => {
-        window.location.href = 'auth.html';
-      }, 5000); // 5-second delay
+        mainTitle.classList.add('fade-out');
+        loaderContainer.classList.add('fade-in-center');
+      }, 1000);
+
+      // Check session and redirect after 5 seconds
+      setTimeout(async () => {
+        const { data: { session } } = await _supabase.auth.getSession();
+        if (session) {
+          window.location.href = 'main.html';
+        } else {
+          window.location.href = 'auth.html';
+        }
+      }, 5000);
     });
   </script>
 </body>
